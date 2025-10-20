@@ -1,0 +1,30 @@
+{% extends 'blog/base.html' %}
+{% block title %}Inicio - Mini Blog{% endblock %}
+{% if user.is_authenticated %}
+  <div class="mb-3">
+    <a class="btn btn-sm btn-outline-primary" href="{% url 'author_create' %}">Cargar Autor</a>
+    <a class="btn btn-sm btn-outline-primary" href="{% url 'category_create' %}">Cargar Categoría</a>
+    <a class="btn btn-sm btn-outline-primary" href="{% url 'post_create' %}">Cargar Post</a>
+    <a class="btn btn-sm btn-outline-secondary" href="{% url 'post_search' %}">Buscar</a>
+  </div>
+{% endif %}
+<h1 class="mb-3">Últimos posts</h1>
+{% block content %}
+<h1 class="mb-3">Últimos posts</h1>
+{% if posts %}
+  <div class="list-group">
+  {% for p in posts %}
+    <div class="list-group-item">
+      <h5 class="mb-1">{{ p.title }}</h5>
+      <small class="text-muted">
+        por {{ p.author.name }} - {{ p.created_at|date:"d/m/Y H:i" }}
+        {% if p.category %} - {{ p.category.title }}{% endif %}
+      </small>
+      <p class="mb-1 mt-2">{{ p.content|truncatechars:160 }}</p>
+    </div>
+  {% endfor %}
+  </div>
+{% else %}
+  <p>No hay posts aún. ¡Cargá uno!</p>
+{% endif %}
+{% endblock %}

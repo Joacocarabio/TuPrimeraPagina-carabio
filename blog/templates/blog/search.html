@@ -1,0 +1,27 @@
+{% extends 'blog/base.html' %}
+{% block title %}Buscar Posts{% endblock %}
+{% block content %}
+<h2>Buscar</h2>
+<form method="get" class="card card-body mb-3">
+  {{ form.as_p }}
+  <button class="btn btn-success">Buscar</button>
+</form>
+
+{% if form.is_bound %}
+  <h5 class="mb-3">Resultados</h5>
+  {% if results %}
+    <ul class="list-group">
+      {% for p in results %}
+        <li class="list-group-item">
+          <strong>{{ p.title }}</strong> — {{ p.author.name }}
+          {% if p.category %}<span class="badge bg-secondary">{{ p.category.title }}</span>{% endif %}
+          <div class="text-muted"><small>{{ p.created_at|date:"d/m/Y H:i" }}</small></div>
+          <div>{{ p.content|truncatechars:140 }}</div>
+        </li>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <p>No hubo coincidencias.</p>
+  {% endif %}
+{% endif %}
+{% endblock %}
