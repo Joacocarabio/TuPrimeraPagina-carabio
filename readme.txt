@@ -1,4 +1,4 @@
-# BlogEntrega 📝
+# BlogEntrega
 
 Proyecto hecho en Django para la entrega de clase.  
 Es una web tipo blog con formularios y búsqueda en base de datos.
