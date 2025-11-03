@@ -1,0 +1,19 @@
+{% extends 'blog/base.html' %}
+{% block title %}Páginas{% endblock %}
+{% block content %}
+<h1>Páginas</h1>
+
+{% if posts %}
+  <div class="list-group">
+    {% for p in posts %}
+      <a href="{% url 'post_detail' p.pk %}" class="list-group-item list-group-item-action">
+        <strong>{{ p.title }}</strong>
+        <div class="text-muted"><small>{{ p.subtitle }}</small></div>
+      </a>
+    {% endfor %}
+  </div>
+{% else %}
+  <p>No hay páginas aún.</p>
+{% endif %}
+
+{% endblock %}
